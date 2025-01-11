@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model IEL.Models.NovoEstudanteViewModel
+}
+
+
+<h1>Novo Estudante</h1>
+
+<form asp-action="Novo" method="post" class="mt-4">
+    <div class="mb-3">
+        <label for="Nome" class="form-label">Nome</label>
+        <input type="text" id="Nome" asp-for="Nome" class="form-control" placeholder="Digite o nome completo" maxlength="100"/>
+        @if (ViewData.ModelState["Nome"]?.Errors.Count > 0)
+        {
+            <div class="text-danger">
+                <p>@ViewData.ModelState["Nome"]?.Errors.FirstOrDefault()?.ErrorMessage</p>
+            </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label for="CPF" class="form-label">CPF</label>
+        <input type="text" id="CPF" asp-for="CPF" class="form-control cpf-mascara" placeholder="000.000.000-00" maxlength="14" />
+        @if (ViewData.ModelState["CPF"]?.Errors.Count > 0)
+        {
+            <div class="text-danger">
+                <p>@ViewData.ModelState["CPF"]?.Errors.FirstOrDefault()?.ErrorMessage</p>
+            </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label for="Endereco" class="form-label">Endereço</label>
+        <input type="text" id="Endereco" asp-for="Endereco" class="form-control" placeholder="Digite o endereço completo" maxlength="200"/>
+        @if (ViewData.ModelState["Endereco"]?.Errors.Count > 0)
+        {
+            <div class="text-danger">
+                <p>@ViewData.ModelState["Endereco"]?.Errors.FirstOrDefault()?.ErrorMessage</p>
+            </div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label for="DataConclusao" class="form-label">Data de Conclusão</label>
+        <input type="date" id="DataConclusao" asp-for="DataConclusao" class="form-control" />
+        @if (ViewData.ModelState["DataConclusao"]?.Errors.Count > 0)
+        {
+            <div class="text-danger">
+                <p>@ViewData.ModelState["DataConclusao"]?.Errors.FirstOrDefault()?.ErrorMessage</p>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="@Url.Action("Listar", "Estudantes")" class="btn btn-secondary">Cancelar</a>
+</form>

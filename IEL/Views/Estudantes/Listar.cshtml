@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model List<IEL.Models.Entities.Estudante>
+}
+
+<h1>Lista de Estudantes</h1>
+
+<a href="@Url.Action("Novo", "Estudantes")" class="btn btn-primary">Novo Estudante+</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Endereço</th>
+            <th>Data de Conclusão</th>
+        </tr>
+    </thead>
+    <tbody>
+		@foreach (var estudante in Model)
+		{
+			<tr>
+				<td>@estudante.Nome</td>
+				<td>@estudante.CPF</td>
+				<td>@estudante.Endereco</td>
+				<td>@estudante.DataConclusao</td>
+                <td>
+					<a href="@Url.Action("Editar", "Estudantes", new { id = estudante.Id })" class="btn btn-primary">Editar</a>
+					<a href="@Url.Action("Excluir", "Estudantes", new { id = estudante.Id })" class="btn btn-danger">Excluir</a>
+                </td>
+			</tr>
+		}
+    </tbody>
+</table>

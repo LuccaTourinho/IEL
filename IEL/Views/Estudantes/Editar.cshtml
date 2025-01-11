@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model IEL.Models.Entities.Estudante 
+}
+
+<h1>Editar Estudante</h1>
+
+<form asp-action="Novo" method="post" class="mt-4">
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Nome, new { @class = "form-label" })
+        @Html.EditorFor(m => m.Nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Digite o nome completo" } })
+        @Html.ValidationMessageFor(m => m.Nome, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.CPF, new { @class = "form-label" })
+        @Html.EditorFor(m => m.CPF, new { htmlAttributes = new { @class = "form-control", placeholder = "000.000.000-00" } })
+        @Html.ValidationMessageFor(m => m.CPF, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Endereco, new { @class = "form-label" })
+        @Html.EditorFor(m => m.Endereco, new { htmlAttributes = new { @class = "form-control", placeholder = "Digite o endereço completo" } })
+        @Html.ValidationMessageFor(m => m.Endereco, null, new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        @Html.LabelFor(m => m.DataConclusao, new { @class = "form-label" })
+        @Html.EditorFor(m => m.DataConclusao, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.DataConclusao, null, new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="@Url.Action("Index", "Estudantes")" class="btn btn-secondary">Cancelar</a>
+</form>

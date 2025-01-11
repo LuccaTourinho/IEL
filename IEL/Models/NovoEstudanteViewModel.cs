@@ -1,14 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace IEL.Models.Entities
+namespace IEL.Models
 {
-    public class Estudante
+    public class NovoEstudanteViewModel
     {
-        [Key]
-        public Guid Id { get; set; }
-
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [StringLength(100)]
         public string Nome { get; set; }
@@ -27,8 +22,5 @@ namespace IEL.Models.Entities
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Conclusão")]
         public DateTime DataConclusao { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }
