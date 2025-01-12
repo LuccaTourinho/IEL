@@ -28,9 +28,75 @@
 				<td>@estudante.DataConclusao</td>
                 <td>
 					<a href="@Url.Action("Editar", "Estudantes", new { id = estudante.Id })" class="btn btn-primary">Editar</a>
-					<a href="@Url.Action("Excluir", "Estudantes", new { id = estudante.Id })" class="btn btn-danger">Excluir</a>
+                    <button class="btn btn-danger delete-btn" 
+                            data-id="@estudante.Id" 
+                            data-name="@estudante.Nome" 
+                            data-cpf="@estudante.CPF" 
+                            data-endereco="@estudante.Endereco" 
+                            data-datecon="@estudante.DataConclusao">Excluir</button>
+                    <!-- Formulário de exclusão -->
+                    <form id="delete-form-@estudante.Id" action="@Url.Action("Excluir", "Estudantes")" method="POST" style="display:none;">
+                        <input type="hidden" name="Id" value="@estudante.Id" />
+                    </form>
                 </td>
 			</tr>
 		}
     </tbody>
 </table>
+
+<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+    <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    ">
+        <h6 style="font-size: 18px; font-weight: bold; margin-bottom: 20px;">
+            Tem certeza que deseja excluir este estudante?
+        </h6>
+        <div style="display: flex; justify-content: space-around; gap: 10px;">
+            <button class="btn btn-danger confirmar-exclusao" style="flex: 1;">Sim</button>
+            <button class="btn btn-primary cancel-exclusao" style="flex: 1;">Não</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        const overlay = document.getElementById('overlay');
+        const yesButton = overlay.querySelector('.confirmar-exclusao');
+        const noButton = overlay.querySelector('.cancel-exclusao');
+        let studentToDelete = null;
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const studentId = this.getAttribute('data-id');
+                overlay.style.display = 'block';
+
+                // Define o ID do estudante no botão "Sim"
+                yesButton.setAttribute('data-id', studentId);
+            });
+        });
+
+        noButton.addEventListener('click', function () {
+            overlay.style.display = 'none';
+        });
+
+        yesButton.addEventListener('click', function () {
+            const studentId = this.getAttribute('data-id');
+            const form = document.getElementById(`delete-form-${studentId}`);
+
+            // Submete o formulário para fazer a exclusão via POST
+            form.submit();
+
+            overlay.style.display = 'none';
+        });
+    });
+</script>
