@@ -1,0 +1,21 @@
+INSERT INTO Estudantes (Id, Nome, CPF, Endereco, DataConclusao, CreatedAt, UpdatedAt)
+VALUES 
+    (NEWID(), 'Lucca Tourinho Santos Vieira', '123.456.789-01', 'Rua Exemplo, 123', '2025-01-15', GETDATE(), GETDATE()),
+    (NEWID(), 'Ana Paula Silva Costa', '987.654.321-00', 'Av. Central, 456', '2025-06-10', GETDATE(), GETDATE()),
+    (NEWID(), 'Carlos Eduardo Pereira', '456.789.123-02', 'Rua das Flores, 789', '2024-12-25', GETDATE(), GETDATE()),
+    (NEWID(), 'Fernanda Oliveira Lima', '654.321.987-03', 'Praça da Liberdade, 321', '2025-04-22', GETDATE(), GETDATE()),
+    (NEWID(), 'Gustavo Henrique Souza', '321.654.987-04', 'Rua Nova, 654', '2025-05-30', GETDATE(), GETDATE()),
+    (NEWID(), 'Juliana Costa Silva', '567.890.123-05', 'Avenida Paulista, 987', '2024-11-15', GETDATE(), GETDATE()),
+    (NEWID(), 'Roberto Carlos Ferreira', '234.567.890-06', 'Rua do Sol, 101', '2025-02-10', GETDATE(), GETDATE()),
+    (NEWID(), 'Mariana Santos Oliveira', '345.678.901-07', 'Beco do Limoeiro, 202', '2025-07-18', GETDATE(), GETDATE()),
+    (NEWID(), 'Ricardo Almeida Souza', '456.789.234-08', 'Rua da Paz, 303', '2025-08-05', GETDATE(), GETDATE()),
+    (NEWID(), 'Patricia Regina Silva', '567.890.234-09', 'Avenida Brasil, 404', '2025-09-12', GETDATE(), GETDATE()),
+    (NEWID(), 'Eduardo Vieira Costa', '678.901.345-10', 'Rua da Liberdade, 505', '2024-10-30', GETDATE(), GETDATE()),
+    (NEWID(), 'Vanessa Martins Pereira', '789.012.456-11', 'Avenida Atlântica, 606', '2025-11-28', GETDATE(), GETDATE()),
+    (NEWID(), 'Felipe Rocha Oliveira', '890.123.567-12', 'Rua dos Três Irmãos, 707', '2025-12-20', GETDATE(), GETDATE()),
+    (NEWID(), 'Beatriz Clara Costa', '901.234.678-13', 'Rua do Mar, 808', '2025-01-05', GETDATE(), GETDATE()),
+    (NEWID(), 'Lucas de Souza Martins', '012.345.789-14', 'Rua das Palmeiras, 909', '2025-02-12', GETDATE(), GETDATE()),
+    (NEWID(), 'Larissa Lima Carvalho', '123.456.890-15', 'Rua do Horizonte, 1110', '2025-03-17', GETDATE(), GETDATE()),
+    (NEWID(), 'Marcos Antônio Costa', '234.567.901-16', 'Rua do Campo, 1211', '2025-04-25', GETDATE(), GETDATE()),
+    (NEWID(), 'Simone Pereira da Silva', '345.678.012-17', 'Avenida Sol, 1312', '2025-05-30', GETDATE(), GETDATE()),
+    (NEWID(), 'Tiago da Silva Gomes', '456.789.123-18', 'Rua Rio, 1413', '2025-06-18', GETDATE(), GETDATE());

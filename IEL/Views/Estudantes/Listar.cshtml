@@ -7,7 +7,7 @@
 
 <h1>Lista de Estudantes</h1>
 
-<a href="@Url.Action("Novo", "Estudantes")" class="btn btn-primary">Novo Estudante+</a>
+<a href="@Url.Action("Novo", "Estudantes")" class="btn btn-primary">Novo</a>
 
 <table class="table">
     <thead>
@@ -17,23 +17,25 @@
             <th>Endereço</th>
             <th>Data de Conclusão</th>
         </tr>
+        <!-- Barra de pesquisa abaixo de cada th -->
+        <tr>
+            <th><input type="text" class="form-control" id="nomeFiltro" placeholder="Pesquisar Nome" /></th>
+            <th><input type="text" class="form-control" id="cpfFiltro" placeholder="Pesquisar CPF" /></th>
+            <th><input type="text" class="form-control" id="enderecoFiltro" placeholder="Pesquisar Endereço" /></th>
+            <th><input type="text" class="form-control" id="dataFiltro" placeholder="Pesquisar Data" /></th>
+        </tr>
     </thead>
-    <tbody>
+    <tbody id="estudantesTabela">
 		@foreach (var estudante in Model)
 		{
 			<tr>
 				<td>@estudante.Nome</td>
 				<td>@estudante.CPF</td>
 				<td>@estudante.Endereco</td>
-				<td>@estudante.DataConclusao</td>
+				<td>@estudante.DataConclusao.ToString("dd/MM/yyyy")</td>
                 <td>
 					<a href="@Url.Action("Editar", "Estudantes", new { id = estudante.Id })" class="btn btn-primary">Editar</a>
-                    <button class="btn btn-danger delete-btn" 
-                            data-id="@estudante.Id" 
-                            data-name="@estudante.Nome" 
-                            data-cpf="@estudante.CPF" 
-                            data-endereco="@estudante.Endereco" 
-                            data-datecon="@estudante.DataConclusao">Excluir</button>
+                    <button class="btn btn-danger delete-btn" data-id="@estudante.Id">Excluir</button>
                     <!-- Formulário de exclusão -->
                     <form id="delete-form-@estudante.Id" action="@Url.Action("Excluir", "Estudantes")" method="POST" style="display:none;">
                         <input type="hidden" name="Id" value="@estudante.Id" />
@@ -44,7 +46,16 @@
     </tbody>
 </table>
 
-<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+<div id="overlay" 
+     style="
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.5); 
+        z-index: 1000;">
     <div style="
       position: absolute;
       top: 50%;
@@ -98,5 +109,48 @@
 
             overlay.style.display = 'none';
         });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Captura os inputs de filtro
+        const nomeFiltro = document.getElementById('nomeFiltro');
+        const cpfFiltro = document.getElementById('cpfFiltro');
+        const enderecoFiltro = document.getElementById('enderecoFiltro');
+        const dataFiltro = document.getElementById('dataFiltro');
+
+        // Captura a tabela de estudantes
+        const tabelaEstudantes = document.getElementById('estudantesTabela');
+        const estudantesLinhas = tabelaEstudantes.getElementsByTagName('tr');
+
+        // Função para aplicar o filtro
+        function aplicarFiltro() {
+            for (let i = 0; i < estudantesLinhas.length; i++) {
+                const linha = estudantesLinhas[i];
+                const nome = linha.cells[0].textContent.toLowerCase();
+                const cpf = linha.cells[1].textContent.toLowerCase();
+                const endereco = linha.cells[2].textContent.toLowerCase();
+                const data = linha.cells[3].textContent.toLowerCase();
+
+                // Verifica se a linha deve ser exibida com base nos filtros
+                const nomeMatch = nome.includes(nomeFiltro.value.toLowerCase());
+                const cpfMatch = cpf.includes(cpfFiltro.value.toLowerCase());
+                const enderecoMatch = endereco.includes(enderecoFiltro.value.toLowerCase());
+                const dataMatch = data.includes(dataFiltro.value.toLowerCase());
+
+                if (nomeMatch && cpfMatch && enderecoMatch && dataMatch) {
+                    linha.style.display = '';
+                } else {
+                    linha.style.display = 'none';
+                }
+            }
+        }
+
+        // Adiciona eventos de input nos campos de filtro
+        nomeFiltro.addEventListener('input', aplicarFiltro);
+        cpfFiltro.addEventListener('input', aplicarFiltro);
+        enderecoFiltro.addEventListener('input', aplicarFiltro);
+        dataFiltro.addEventListener('input', aplicarFiltro);
     });
 </script>
