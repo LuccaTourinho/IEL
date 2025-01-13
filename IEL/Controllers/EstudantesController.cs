@@ -79,7 +79,7 @@ namespace IEL.Controllers
         [HttpGet]
         public async Task<IActionResult> Listar()
         {
-            var estudantes = await dbContext.Estudantes.ToListAsync();
+            var estudantes = await dbContext.Estudantes.OrderBy(e => e.Nome).ToListAsync();
             return View(estudantes);
         }
 
